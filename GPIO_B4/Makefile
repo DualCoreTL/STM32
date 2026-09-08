@@ -8,8 +8,8 @@ CPU = -mcpu=cortex-m3 -mthumb
 
 CFLAGS = $(CPU) \
          -DSTM32F103xB \
-         -I STM32CubeF1/Drivers/CMSIS/Include \
-         -I STM32CubeF1/Drivers/CMSIS/Device/ST/STM32F1xx/Include \
+         -I ../STM32CubeF1/Drivers/CMSIS/Include \
+         -I ../STM32CubeF1/Drivers/CMSIS/Device/ST/STM32F1xx/Include \
          -ffunction-sections \
          -fdata-sections \
          -Wall \
@@ -23,9 +23,9 @@ LDFLAGS = $(CPU) \
           --specs=nosys.specs
 
 SRC_C = main.c \
-        STM32CubeF1/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/system_stm32f1xx.c
+        ../STM32CubeF1/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/system_stm32f1xx.c
 
-SRC_S = STM32CubeF1/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/gcc/startup_stm32f103xb.s
+SRC_S = ../STM32CubeF1/Drivers/CMSIS/Device/ST/STM32F1xx/Source/Templates/gcc/startup_stm32f103xb.s
 
 OBJ_C = $(SRC_C:.c=.o)
 OBJ_S = $(SRC_S:.s=.o)
@@ -33,6 +33,7 @@ OBJ_S = $(SRC_S:.s=.o)
 all: build/$(PROJECT).elf build/$(PROJECT).bin
 
 build/$(PROJECT).elf: $(OBJ_C) $(OBJ_S)
+	@mkdir -p build
 	$(CC) $(LDFLAGS) -o $@ $^
 
 build/$(PROJECT).bin: build/$(PROJECT).elf
