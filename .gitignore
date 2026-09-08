@@ -1,0 +1,9 @@
+# Build files
+**/build/
+**/*.o
+**/*.elf
+**/*.bin
+**/*.map
+
+# Backup files
+**/*~
